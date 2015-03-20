@@ -15,7 +15,7 @@ public class Customer {
     public double totalAmount() {
         double totalAmount = 0;
         for (Rental rental : rentalList) {
-            totalAmount += rental.getAmountFor();
+            totalAmount += rental.movie.getAmountFor(rental);
         }
         return totalAmount;
     }
@@ -23,7 +23,7 @@ public class Customer {
     public int getTotalFrequentRenterPoints() {
         int frequentRenterPoints = 0;
         for (Rental rental : rentalList) {
-            frequentRenterPoints += rental.getFrequentRenterPoints();
+            frequentRenterPoints += rental.movie.getFrequentRenterPoints(rental);
         }
         return frequentRenterPoints;
     }
@@ -38,7 +38,7 @@ public class Customer {
 
     public String getRentalSubTotal(Rental rental) {
         return "\t" + rental.getMovie().getTitle() + "\t"
-                + String.valueOf(rental.getAmountFor()) + "\n";
+                + String.valueOf(rental.movie.getAmountFor(rental)) + "\n";
     }
 
     public List<Rental> getRentalList() {

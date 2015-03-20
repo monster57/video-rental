@@ -10,7 +10,7 @@ public class Movie {
 		this.priceCode = priceCode;
 	}
 
-	public MoviePricingCategory getPriceCode() {
+	public MoviePricingCategory getCostForMovie() {
 		return priceCode;
 	}
 
@@ -23,8 +23,19 @@ public class Movie {
 	}
 
     public boolean isNewRelease() {
-        return getPriceCode() == MoviePricingCategory.NEW_RELEASE;
+        return getCostForMovie() == MoviePricingCategory.NEW_RELEASE;
     }
 
+    public double getAmountFor(Rental rental) {
+        MoviePricingCategory priceCode = getCostForMovie();
+        return priceCode.getCostFor(rental.daysRented);
+    }
+
+    public int getFrequentRenterPoints(Rental rental) {
+        int frequentRenterPoints = 1;
+        if (isNewRelease() && rental.daysRented > 1)
+            frequentRenterPoints++;
+        return frequentRenterPoints;
+    }
 }
 
